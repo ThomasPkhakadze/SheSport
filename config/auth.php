@@ -49,12 +49,12 @@ return [
 
         'author' => [
             'driver' => 'session',
-            'provider' => 'author',
+            'provider' => 'authors',
         ],
 
-        'redactor' =>[
+        'admin' =>[
             'driver' => 'session',
-            'provider' => 'redactor',
+            'provider' => 'admins',
         ], 
     ],
 
@@ -82,14 +82,14 @@ return [
             'model' => App\User::class,
         ],
 
-        'author' => [
+        'authors' => [
             'driver' => 'eloquent',
             'model' => App\Author::class,
         ],
 
-        'redactor' => [
+        'admins' => [
             'driver' => 'eloquent',
-            'model' => App\Redactor::class,
+            'model' => App\Admin::class,
         ],
 
 
@@ -131,8 +131,8 @@ return [
             'throttle' => 60,
         ],
 
-        'redactors' => [
-            'provider' => 'redactors',
+        'admins' => [
+            'provider' => 'admins',
             'table' => 'password_resets',
             'expire' => 60,
             'throttle' => 60,

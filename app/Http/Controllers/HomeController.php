@@ -29,42 +29,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-      // select all users except logged one
-      $users = Author::where('id', '!=', Auth::id())->get();
-        return view('home', ['users' => $users]);
+
+        return view('front.welcome');
     }
 
-    public function getMessage($user_id) 
-    {
-      $my_id = Auth::id();
-      
-      $messages = Message::where(function($query) use ($user_id, $my_id) {
-        $query->where('from', $my_id)->where('to', $user_id);
-      })->orWhere(function ($query) use ($user_id, $my_id){
-        $query->where('from', $user_id)->where('to', $my_id);
-      })->get();
-
-      return view('messages.index', ['messages' => $messages]);
-    }
-    public function sendMessage(Request $request) 
-    {
-      $from = Auth::id();
-      $to = $request->reciever_id;
-      $text = $request->message;
-
-      $message = new Message;
-      $message->from = $from;
-      $message->to = $to;
-      $message->message = $text;
-      $message->is_read = 0;
-      $message->save();
-       
-
-
-     event(new MessageSent('123'));
-
-     return redirect()->route('get-message');
-     
-    }
 
 }

@@ -8,10 +8,7 @@ use Illuminate\Http\Request;
 
 class SpecialUserLoginController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('guest');
-    }
+   
 
     public function showAuthorLoginForm()
     {
@@ -36,12 +33,12 @@ class SpecialUserLoginController extends Controller
         return redirect()->back()->withInput($request->only('email','remember'));
     }
 
-    public function showRedactorLoginForm()
+    public function showAdminLoginForm()
     {
-        return view('redactor.login');
+        return view('admin.login');
     }
 
-    public function redactorLogin(Request $request)
+    public function adminLogin(Request $request)
     {
         // Validate form data
         $this->validate($request, [
@@ -50,9 +47,9 @@ class SpecialUserLoginController extends Controller
         ]);
 
         // Attempt to log the user in
-        if(Auth::guard('redactor')->attempt(['email' => $request->email, 'password' => $request->password], $request->remember))
+        if(Auth::guard('admin')->attempt(['email' => $request->email, 'password' => $request->password], $request->remember))
         {
-            return redirect()->intended(route('redactor.dashboard'));
+            return redirect()->intended(route('admin.dashboard'));
         }
 
         // if unsuccessful

@@ -16,14 +16,38 @@ use App\Events\MessageSent;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('front.welcome');
 })->name('main');
 
 
-// Auth Routes
+// User Routes
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/home/{user_id}', 'HomeController@getMessage')->name('get-message');
-Route::post('/home', 'HomeController@sendMessage')->name('sent-message');
+
+
+// Author routes
+Route::prefix('author')->group(function(){
+    // Dashboard
+    Route::get('/', 'Author\DashboardController@getAuthorDashboard')->name('author.dashboard');
+    // Login
+    Route::get('/login', 'SpecialUserLoginController@showAuthorLoginForm')->name('author.login');
+    Route::post('/login', 'SpecialUserLoginController@authorLogin')->name('author.login.submit');
+    // Register
+    Route::get('/register', 'Admin\SpecialUserRegistrationController@showAuthorRegisterForm')->name('author.register');
+    Route::post('/register', 'Admin\SpecialUserRegistrationController@createNewAuthor')->name('author.register.submit');
+});
+
+
+// Admin routes
+Route::prefix('admin')->group(function(){
+    // Dashboard
+    Route::get('/', 'Admin\DashboardController@getAdminDashboard')->name('admin.dashboard');
+    // Login
+    Route::get('/login', 'SpecialUserLoginController@showAdminLoginForm')->name('admin.login');
+    Route::post('/login', 'SpecialUserLoginController@adminLogin')->name('admin.login.submit');
+    // Register
+    Route::get('/register', 'Admin\SpecialUserRegistrationController@showAdminRegisterForm')->name('admin.register');
+    Route::post('/register', 'Admin\SpecialUserRegistrationController@createNewAdmin')->name('admin.register.submit');
+});
