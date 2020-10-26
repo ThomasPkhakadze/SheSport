@@ -44,6 +44,10 @@ Route::prefix('author')->group(function(){
 Route::prefix('admin')->group(function(){
     // Dashboard
     Route::get('/', 'Admin\DashboardController@getAdminDashboard')->name('admin.dashboard');
+
+    // Add Special Features (Sport, Tag, Category)
+    Route::get('/special-features', 'Admin\DashboardController@addSpecialFeatures')->name('admin.SF');
+    Route::post('/special-features', 'Admin\DashboardController@submitSpecialFeatures')->name('admin.SF.submit');
     // Login
     Route::get('/login', 'SpecialUserLoginController@showAdminLoginForm')->name('admin.login');
     Route::post('/login', 'SpecialUserLoginController@adminLogin')->name('admin.login.submit');
