@@ -17,39 +17,62 @@ class SpecialUserRegistrationController extends Controller
 
     public function showAuthorRegisterForm()
     {
-        return view('admin.createNewAuthor');
+        $authors = Author::all();
+        return view('admin.user.createNewAuthor', ['authors' => $authors]);
     }
 
     public function createNewAuthor(Request $request)
     {
         $this->validate($request, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:admins'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:authors',
+            'password' => 'required|string|min:8',
         ]);
 
-        $request['password'] = Hash::make($request->password);
-        Author::create($request->all());
+        $password = Hash::make($request->password);
 
-        return redirect()->intended(route('admin.dashboard'));
+        $author = new Author;
+        $author->name = $request->name;
+        $author->email = $request->email;
+        $author->password = $password;
+        $author->save();
+
+        return redirect()->route('author');
+    }
+
+    public function deleteAuthor($id)
+    {
+        $author = Author::find($id);
+
+        $author->delete();
+
+        return redirect()->route('author');
     }
 
     public function showAdminRegisterForm()
     {
-        return view('admin.createNewAdmin');
+        $admins = Admin::all();
+        return view('admin.user.createNewAdmin' , ['admins' => $admins]);
     }
+
+   
 
     public function createNewAdmin(Request $request)
     {
         $this->validate($request, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:admins'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:admins',
+            'password' => 'required|string|min:8',
         ]);
 
-        $request['password'] = Hash::make($request->password);
-        Admin::create($request->all());
+        $password = Hash::make($request->password);
 
-        return redirect()->intended(route('admin.dashboard'));
+        $admin = new Author;
+        $admin->name = $request->name;
+        $admin->email = $request->email;
+        $admin->password = $password;
+        $admin->save();
+
+        return redirect()->route('admin');
     }
 }

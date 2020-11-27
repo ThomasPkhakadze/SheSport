@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Post;
+use App\Tag;
+use App\Category;
+use App\Sport;
 
 class DashboardController extends Controller
 {
@@ -18,12 +21,20 @@ class DashboardController extends Controller
         return view('author.dashboard');
     }
 
-    public function seeAllPosts(){
-        $posts = Post::whereHas('author', function(builder $query) {
-            $query->where('content', 'like', Auth::user()->name);
-        })->get();
+    public function seeAllPosts(){ 
+        $posts = Post::all();
+        $tags = Tag::all();
+        $categories = Category::all();
+        $sport_types = Sport::all();
 
-        return view('author.post', ['posts' => $posts]);
+        return view('author.post',
+        [
+            'posts' => $posts,
+            'tags' => $tags,
+            'categories' => $categories,
+            'sport_types' => $sport_types
+        
+        ]);
     }
     
     public function requestPostApproval(Request $request) 
@@ -36,49 +47,43 @@ class DashboardController extends Controller
             'category' => 'nullable',
             'tag' => 'nullable', 
             'img' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'video' => 'nullable'
+            'video' => 'nullable',
+            'author_id' => 'required'
         ]);
 
         $post = new Post;
+        
         $post->title = $request->title;
         $post->desc = $request->desc;
         $post->body = $request->body;
+        // $post->sportsType = $request->sportsType;      
+        // $post->category = $request->category;
+        // $post->tag = $request->tag;
         
-        if(!empty($request->sportsType)){
-            return  $post->sportsType = $request->sportsType;
 
-        }
+        // $newfilename = time() . rand() . '.' . $request->file('image')->extension();
+        //     $path = $request->file('image')->move(public_path("images/"), $newfilename);
+        //     $lastPath = "images/" . $newfilename;
+        //     $request['image'] = $lastPath;
+        //     $post->image = $lastPath; 
+        
 
-        if(!empty($request->category)){
-            return  $post->category = $request->category;
-        }
-
-        if(!empty($request->tag)){
-            return  $post->tag = $request->tag;
-        }
-
-        if(!empty($request->img)){
-            $newfilename = time() . rand() . '.' . $request->file('image')->extension();
-            $path = $request->file('image')->move(public_path("images/"), $newfilename);
-            $lastPath = "images/" . $newfilename;
-            $request['image'] = $lastPath;
-            $post->image = $lastPath; 
-        }
-
-        if(!empty($request->img)){
-            $newfilename = time() . rand() . '.' . $request->file('video')->extension();
-            $path = $request->file('video')->move(public_path("videos/"), $newfilename);
-            $lastPath = "videos/" . $newfilename;
-            $request['video'] = $lastPath;
-            $post->video = $lastPath; 
-        }
+        //  $newfilename = time() . rand() . '.' . $request->file('video')->extension();
+        //     $path = $request->file('video')->move(public_path("videos/"), $newfilename);
+        //     $lastPath = "videos/" . $newfilename;
+        //     $request['video'] = $lastPath;
+        //     $post->video = $lastPath; 
+        
        
-        $post->isPublished = false;
-        $post->author = Auth::user()->name;
+        $post->is_published = false;
+        $post->published_by_admin = false;
+        $post->author_id = $request->author_id;
 
         $post->save();
 
         return redirect()->route('author.post');
+
+        
     }
     
     public function editRequestedPost($id) 
@@ -136,7 +141,8 @@ class DashboardController extends Controller
             $post->video = $lastPath; 
         }
        
-        $post->isPublished = false;
+        $post->is_published = false;
+        $post->published_by_admin = false;
 
         $post->save();
 
@@ -147,7 +153,7 @@ class DashboardController extends Controller
         
         $post =  Post::findOrFail($id);
         
-        if($post->isPublished === false){
+        if($post->is_published === false){
             $post->delete();
         }
 

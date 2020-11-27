@@ -38,22 +38,22 @@
     <!-- Brand Logo -->
     <a href="index3.html" class="brand-link">
       <img src="{{ asset('back/dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
-           style="opacity: .8">
+           style="opacity: .6">
       <span class="brand-text font-weight-light">AdminLTE 3</span>
     </a>
 
     <!-- Sidebar -->
     <div class="sidebar">
       <!-- Sidebar user panel (optional) -->
-      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+      <div class="user-panel mt-3 pb-3 mb-3 d-flex ">
         <div class="image">
           <img src="{{ asset('back/dist/img/user2-160x160.jpg') }}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
           <a href="#" class="d-block">{{ Auth::user()->name }}</a>
         </div>
-        <br>
-        <div class="logout">
+        
+        <div class="logout  m-3" >
           <a href="{{ route('logout') }}" 
           onclick="event.preventDefault();
           document.getElementById('logout-form').submit();"> Logout</a>
@@ -63,43 +63,64 @@
           </form>
         </div>
       </div>
+      
 
       <!-- Sidebar Menu -->
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-          <li class="nav-item has-treeview menu-open">
-            <a href="#" class="nav-link active">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
-              <p>
-                Dashboard
-                <i class="right fas fa-angle-left"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="./index.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Dashboard v1</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="./index2.html" class="nav-link active">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Dashboard v2</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="./index3.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Dashboard v3</p>
-                </a>
-              </li>
-            </ul>
-          </li>
+          
           {{-- Special accesibility only for admin --}}
-          @yield('admin')
+            @if(Auth::guard('admin')->check())
+              
+            <li class="nav-item">
+              <a href="{{ route('admin.post') }}" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Post </p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="{{ route('author') }}" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Create/View authors</p>
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a href="{{ route('admin') }}" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Create/View admins</p>
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a href="{{ route('admin.slider') }}" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Create/view Slider</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="./index.html" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Profile</p>
+              </a>
+            </li>
+            @elseif(Auth::guard('author')->check())
+            <li class="nav-item">
+              <a href="{{ route('author.post') }}" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Create/view Posts</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="{{ route('author.profile') }}" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Edit Profile</p>
+              </a>
+            </li>
+            @endif
+        
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

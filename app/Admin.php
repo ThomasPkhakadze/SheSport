@@ -29,6 +29,9 @@ class Admin extends Authenticatable
         'password', 'remember_token',
     ];
 
-    
+    public function post()
+    {
+        return $this->hasMany('App\Post');
+    }
 
 }

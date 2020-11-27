@@ -10,7 +10,7 @@
 	<link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700|Raleway:300,400,500,600,700|Crete+Round:400i" rel="stylesheet" type="text/css" />
 	<link rel="stylesheet" href="{{ asset('front/css/bootstrap.css') }}" type="text/css" />
 	<link rel="stylesheet" href="{{ asset('front/css/style.css') }}" type="text/css" />
-	<link rel="stylesheet" href="{{ asset('frontcss/swiper.css') }}" type="text/css" />
+	<link rel="stylesheet" href="{{ asset('front/css/swiper.css') }}" type="text/css" />
 	<link rel="stylesheet" href="{{ asset('front/css/dark.css') }}" type="text/css" />
 	<link rel="stylesheet" href="{{ asset('front/css/font-icons.css') }}" type="text/css" />
 	<link rel="stylesheet" href="{{ asset('front/css/animate.css') }}" type="text/css" />
@@ -38,27 +38,23 @@
 			<div class="slider-parallax-inner">
 
 				<div class="swiper-container swiper-parent">
-					<div class="swiper-wrapper">
-						<div class="swiper-slide dark" style="background-image: url('{{ asset('images/79362249_1276979849152837_4083922855161495552_n.jpg') }}');">
-							<div class="container clearfix">
-								<div class="slider-caption slider-caption-center">
-									<h2 data-animate="fadeInUp">Welcome to Canvas</h2>
-									<p class="d-none d-sm-block" data-animate="fadeInUp" data-delay="200">Create just what you need for your Perfect Website. Choose from a wide range of Elements &amp; simply put them on our Canvas.</p>
+					<div class="swiper-wrapper">	
+						@foreach ($sliders as $slider)
+							<div class="swiper-slide dark" style="background-image: url('{{ asset($slider->image) }}');">
+								<div class="container clearfix">
+									<div class="slider-caption slider-caption-center">
+										<h2 data-animate="fadeInUp">{{ $slider->title }}</h2>
+										<p class="d-none d-sm-block" data-animate="fadeInUp" data-delay="200">{{ $slider->text }}</p>
+									</div>
 								</div>
 							</div>
-						</div>
-						<div class="swiper-slide" style="background-image: url('{{ asset('images/79362249_1276979849152837_4083922855161495552_n.jpg') }}'); background-position: center top;">
-							<div class="container clearfix">
-								<div class="slider-caption">
-									<h2 data-animate="fadeInUp">Great Performance</h2>
-									<p class="d-none d-sm-block" data-animate="fadeInUp" data-delay="200">You'll be surprised to see the Final Results of your Creation &amp; would crave for more.</p>
-								</div>
-							</div>
-						</div>
+						@endforeach			
 					</div>
+
 					<div class="slider-arrow-left"><i class="icon-angle-left"></i></div>
 					<div class="slider-arrow-right"><i class="icon-angle-right"></i></div>
 					<div class="slide-number"><div class="slide-number-current"></div><span>/</span><div class="slide-number-total"></div></div>
+					
 				</div>
 
 			</div>
@@ -77,9 +73,10 @@
 
 					<!-- Logo
 					============================================= -->
-					<div id="logo">
-						<a href="index.html" class="standard-logo" data-dark-logo="images/logo-dark.png"><img src="images/logo.png" alt="Canvas Logo"></a>
-						<a href="index.html" class="retina-logo" data-dark-logo="images/logo-dark@2x.png"><img src="images/logo@2x.png" alt="Canvas Logo"></a>
+					<div id="logo" >
+						<a class="m-4" href="{{ url('/') }}">
+							{{ config('app.name', 'Laravel') }}
+						</a>
 					</div><!-- #logo end -->
 
 					<!-- Primary Navigation
@@ -107,7 +104,9 @@
 							</form>
 						</div><!-- #top-search end -->
 
-					</nav><!-- #primary-menu end -->
+					</nav>
+					<!-- #primary-menu end -->
+
 
 				</div>
 
@@ -117,9 +116,280 @@
 
 		<div class="clear"></div>
 
+		<section id="content">
+
+			<div class="content-wrap">
+
+				<div class="container clearfix">
+
+					<div id="portfolio-ajax-wrap">
+						<div id="portfolio-ajax-container"></div>
+					</div>
+
+					<div id="portfolio-ajax-loader"><img src="images/preloader-dark.gif" alt="Preloader"></div>
+
+					<!-- Portfolio Filter
+					============================================= -->
+					<ul id="portfolio-filter" class="portfolio-filter clearfix" data-container="#portfolio">
+
+						<li class="activeFilter"><a href="#" data-filter="*">Show All</a></li>
+						<li><a href="#" data-filter=".tennis">Penis</a></li>
+						<li><a href="#" data-filter=".pf-illustrations">Illustrations</a></li>
+						<li><a href="#" data-filter=".pf-uielements">UI Elements</a></li>
+						<li><a href="#" data-filter=".pf-media">Media</a></li>
+						<li><a href="#" data-filter=".pf-graphics">Graphics</a></li>
+
+					</ul><!-- #portfolio-filter end -->
+
+					<div id="portfolio-shuffle" class="portfolio-shuffle" data-container="#portfolio">
+						<i class="icon-random"></i>
+					</div>
+
+					<div class="clear"></div>
+
+					<!-- Portfolio Items
+					============================================= -->
+					<div id="portfolio" class="portfolio grid-container portfolio-nomargin portfolio-ajax clearfix">
+
+						<article id="portfolio-item-1" data-loader="include/ajax/portfolio-ajax-image.php" class="portfolio-item tennis pf-icons">
+							<div class="portfolio-image">
+								<a href="portfolio-single.html">
+									<img src="images/portfolio/4/1.jpg" alt="Open Imagination">
+								</a>
+								<div class="portfolio-overlay">
+									<a href="#" class="center-icon"><i class="icon-line-expand"></i></a>
+								</div>
+							</div>
+							<div class="portfolio-desc">
+								<h3><a href="portfolio-single.html">Open Imagination</a></h3>
+								<span><a href="#">Media</a>, <a href="#">Icons</a></span>
+							</div>
+						</article>
+
+						<article id="portfolio-item-2" data-loader="include/ajax/portfolio-ajax-image.php" class="portfolio-item tenni">
+							<div class="portfolio-image">
+								<a href="portfolio-single.html">
+									<img src="images/portfolio/4/2.jpg" alt="Locked Steel Gate">
+								</a>
+								<div class="portfolio-overlay">
+									<a href="#" class="center-icon"><i class="icon-line-expand"></i></a>
+								</div>
+							</div>
+							<div class="portfolio-desc">
+								<h3><a href="portfolio-single.html">Locked Steel Gate</a></h3>
+								<span><a href="#">Illustrations</a></span>
+							</div>
+						</article>
+
+						<article id="portfolio-item-3" data-loader="include/ajax/portfolio-ajax-video.php" class="portfolio-item tennis pf-uielements">
+							<div class="portfolio-image">
+								<a href="#">
+									<img src="images/portfolio/4/3.jpg" alt="Mac Sunglasses">
+								</a>
+								<div class="portfolio-overlay">
+									<a href="#" class="center-icon"><i class="icon-line-expand"></i></a>
+								</div>
+							</div>
+							<div class="portfolio-desc">
+								<h3><a href="portfolio-single-video.html">Mac Sunglasses</a></h3>
+								<span><a href="#">Graphics</a>, <a href="#">UI Elements</a></span>
+							</div>
+						</article>
+
+						<article id="portfolio-item-4" data-loader="include/ajax/portfolio-ajax-slider.php" class="portfolio-item pf-icons pf-illustrations">
+							<div class="portfolio-image">
+								<div class="fslider" data-arrows="false" data-speed="400" data-pause="4000">
+									<div class="flexslider">
+										<div class="slider-wrap">
+											<div class="slide"><a href="portfolio-single-gallery.html"><img src="images/portfolio/4/4.jpg" alt="Morning Dew"></a></div>
+											<div class="slide"><a href="portfolio-single-gallery.html"><img src="images/portfolio/4/4-1.jpg" alt="Morning Dew"></a></div>
+										</div>
+									</div>
+								</div>
+								<div class="portfolio-overlay" data-lightbox="gallery">
+									<a href="#" class="center-icon"><i class="icon-line-expand"></i></a>
+								</div>
+							</div>
+							<div class="portfolio-desc">
+								<h3><a href="portfolio-single-gallery.html">Morning Dew</a></h3>
+								<span><a href="#">Icons</a>, <a href="#">Illustrations</a></span>
+							</div>
+						</article>
+
+						<article id="portfolio-item-5" data-loader="include/ajax/portfolio-ajax-image.php" class="portfolio-item pf-uielements pf-media">
+							<div class="portfolio-image">
+								<a href="portfolio-single.html">
+									<img src="images/portfolio/4/5.jpg" alt="Console Activity">
+								</a>
+								<div class="portfolio-overlay">
+									<a href="#" class="center-icon"><i class="icon-line-expand"></i></a>
+								</div>
+							</div>
+							<div class="portfolio-desc">
+								<h3><a href="portfolio-single.html">Console Activity</a></h3>
+								<span><a href="#">UI Elements</a>, <a href="#">Media</a></span>
+							</div>
+						</article>
+
+						<article id="portfolio-item-6" data-loader="include/ajax/portfolio-ajax-gallery.php" class="portfolio-item pf-graphics pf-illustrations">
+							<div class="portfolio-image">
+								<div class="fslider" data-arrows="false">
+									<div class="flexslider">
+										<div class="slider-wrap">
+											<div class="slide"><a href="portfolio-single-gallery.html"><img src="images/portfolio/4/6.jpg" alt="Shake It"></a></div>
+											<div class="slide"><a href="portfolio-single-gallery.html"><img src="images/portfolio/4/6-1.jpg" alt="Shake It"></a></div>
+											<div class="slide"><a href="portfolio-single-gallery.html"><img src="images/portfolio/4/6-2.jpg" alt="Shake It"></a></div>
+											<div class="slide"><a href="portfolio-single-gallery.html"><img src="images/portfolio/4/6-3.jpg" alt="Shake It"></a></div>
+										</div>
+									</div>
+								</div>
+								<div class="portfolio-overlay" data-lightbox="gallery">
+									<a href="#" class="center-icon"><i class="icon-line-expand"></i></a>
+								</div>
+							</div>
+							<div class="portfolio-desc">
+								<h3><a href="portfolio-single-gallery.html">Shake It!</a></h3>
+								<span><a href="#">Illustrations</a>, <a href="#">Graphics</a></span>
+							</div>
+						</article>
+
+						<article id="portfolio-item-7" data-loader="include/ajax/portfolio-ajax-video.php" class="portfolio-item pf-uielements pf-icons">
+							<div class="portfolio-image">
+								<a href="portfolio-single-video.html">
+									<img src="images/portfolio/4/7.jpg" alt="Backpack Contents">
+								</a>
+								<div class="portfolio-overlay">
+									<a href="#" class="center-icon"><i class="icon-line-expand"></i></a>
+								</div>
+							</div>
+							<div class="portfolio-desc">
+								<h3><a href="portfolio-single-video.html">Backpack Contents</a></h3>
+								<span><a href="#">UI Elements</a>, <a href="#">Icons</a></span>
+							</div>
+						</article>
+
+						<article id="portfolio-item-8" data-loader="include/ajax/portfolio-ajax-image.php" class="portfolio-item pf-graphics">
+							<div class="portfolio-image">
+								<a href="portfolio-single.html">
+									<img src="images/portfolio/4/8.jpg" alt="Sunset Bulb Glow">
+								</a>
+								<div class="portfolio-overlay">
+									<a href="#" class="center-icon"><i class="icon-line-expand"></i></a>
+								</div>
+							</div>
+							<div class="portfolio-desc">
+								<h3><a href="portfolio-single.html">Sunset Bulb Glow</a></h3>
+								<span><a href="#">Graphics</a></span>
+							</div>
+						</article>
+
+						<article id="portfolio-item-9" data-loader="include/ajax/portfolio-ajax-slider.php" class="portfolio-item pf-illustrations pf-icons">
+							<div class="portfolio-image">
+								<div class="fslider" data-arrows="false" data-speed="650" data-pause="3500" data-animation="fade">
+									<div class="flexslider">
+										<div class="slider-wrap">
+											<div class="slide"><a href="portfolio-single-gallery.html"><img src="images/portfolio/4/9.jpg" alt="Bridge Side"></a></div>
+											<div class="slide"><a href="portfolio-single-gallery.html"><img src="images/portfolio/4/9-1.jpg" alt="Bridge Side"></a></div>
+											<div class="slide"><a href="portfolio-single-gallery.html"><img src="images/portfolio/4/9-2.jpg" alt="Bridge Side"></a></div>
+										</div>
+									</div>
+								</div>
+								<div class="portfolio-overlay" data-lightbox="gallery">
+									<a href="#" class="center-icon"><i class="icon-line-expand"></i></a>
+								</div>
+							</div>
+							<div class="portfolio-desc">
+								<h3><a href="portfolio-single.html">Bridge Side</a></h3>
+								<span><a href="#">Illustrations</a>, <a href="#">Icons</a></span>
+							</div>
+						</article>
+
+						<article id="portfolio-item-10" data-loader="include/ajax/portfolio-ajax-video.php" class="portfolio-item pf-graphics pf-media pf-uielements">
+							<div class="portfolio-image">
+								<a href="portfolio-single-video.html">
+									<img src="images/portfolio/4/10.jpg" alt="Study Table">
+								</a>
+								<div class="portfolio-overlay">
+									<a href="#" class="center-icon"><i class="icon-line-expand"></i></a>
+								</div>
+							</div>
+							<div class="portfolio-desc">
+								<h3><a href="portfolio-single-video.html">Study Table</a></h3>
+								<span><a href="#">Graphics</a>, <a href="#">Media</a></span>
+							</div>
+						</article>
+
+						<article id="portfolio-item-11" data-loader="include/ajax/portfolio-ajax-image.php" class="portfolio-item pf-media pf-icons">
+							<div class="portfolio-image">
+								<a href="portfolio-single.html">
+									<img src="images/portfolio/4/11.jpg" alt="Workspace Stuff">
+								</a>
+								<div class="portfolio-overlay">
+									<a href="#" class="center-icon"><i class="icon-line-expand"></i></a>
+								</div>
+							</div>
+							<div class="portfolio-desc">
+								<h3><a href="portfolio-single.html">Workspace Stuff</a></h3>
+								<span><a href="#">Media</a>, <a href="#">Icons</a></span>
+							</div>
+						</article>
+
+						<article id="portfolio-item-12" data-loader="include/ajax/portfolio-ajax-gallery.php" class="portfolio-item pf-illustrations pf-graphics">
+							<div class="portfolio-image">
+								<div class="fslider" data-arrows="false" data-speed="700" data-pause="7000">
+									<div class="flexslider">
+										<div class="slider-wrap">
+											<div class="slide"><a href="portfolio-single-gallery.html"><img src="images/portfolio/4/12.jpg" alt="Fixed Aperture"></a></div>
+											<div class="slide"><a href="portfolio-single-gallery.html"><img src="images/portfolio/4/12-1.jpg" alt="Fixed Aperture"></a></div>
+										</div>
+									</div>
+								</div>
+								<div class="portfolio-overlay" data-lightbox="gallery">
+									<a href="#" class="center-icon"><i class="icon-line-expand"></i></a>
+								</div>
+							</div>
+							<div class="portfolio-desc">
+								<h3><a href="portfolio-single-gallery.html">Fixed Aperture</a></h3>
+								<span><a href="#">Illustrations</a>, <a href="#">Graphics</a></span>
+							</div>
+						</article>
+						<div class="card card-secondary">
+							<div class="card-header">
+							  <h3 class="card-title">Bootstrap Switch</h3>
+							</div>
+							<div class="card-body">
+							  <div class="bootstrap-switch bootstrap-switch-wrapper bootstrap-switch-focused bootstrap-switch-animate bootstrap-switch-on" style="width: 88px;"><div class="bootstrap-switch-container" style="width: 129px; margin-left: 0px;"><span class="bootstrap-switch-handle-on bootstrap-switch-primary" style="width: 43px;">ON</span><span class="bootstrap-switch-label" style="width: 43px;">&nbsp;</span><span class="bootstrap-switch-handle-off bootstrap-switch-default" style="width: 43px;">OFF</span><input type="checkbox" name="my-checkbox" checked="" data-bootstrap-switch=""></div></div>
+							  <div class="bootstrap-switch bootstrap-switch-wrapper bootstrap-switch-focused bootstrap-switch-animate bootstrap-switch-on" style="width: 88px;"><div class="bootstrap-switch-container" style="width: 129px; margin-left: 0px;"><span class="bootstrap-switch-handle-on bootstrap-switch-success" style="width: 43px;">ON</span><span class="bootstrap-switch-label" style="width: 43px;">&nbsp;</span><span class="bootstrap-switch-handle-off bootstrap-switch-danger" style="width: 43px;">OFF</span><input type="checkbox" name="my-checkbox" checked="" data-bootstrap-switch="" data-off-color="danger" data-on-color="success"></div></div>
+							</div>
+						  </div>
+
+					</div><!-- #portfolio end -->
+
+				</div>
+
+			</div>
+
+		</section><!-- #content end -->
+
 				
 
 	</div>
+
+
+
+
+
+	
+	
+	
+		
+	
+	  
+	
+
+
+
+
 
 
 	<!-- Content
@@ -131,57 +401,7 @@
 				<div class="container clearfix" >
 
 					<div class="row">
-						<nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-							<div class="container">
-								<a class="navbar-brand" href="{{ url('/') }}">
-									{{ config('app.name', 'Laravel') }}
-								</a>
-								<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-									<span class="navbar-toggler-icon"></span>
-								</button>
-				
-								<div class="collapse navbar-collapse" id="navbarSupportedContent">
-									<!-- Left Side Of Navbar -->
-									<ul class="navbar-nav mr-auto">
-				
-									</ul>
-				
-									<!-- Right Side Of Navbar -->
-									<ul class="navbar-nav ml-auto">
-										<!-- Authentication Links -->
-										@guest
-											<li class="nav-item">
-												<a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-											</li>
-											@if (Route::has('register'))
-												<li class="nav-item">
-													<a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-												</li>
-											@endif
-										@else
-											<li class="nav-item dropdown">
-												<a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-													{{ Auth::user()->name }}
-												</a>
-				
-												<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-													<a class="dropdown-item" href="{{ route('logout') }}"
-													   onclick="event.preventDefault();
-																	 document.getElementById('logout-form').submit();">
-														{{ __('Logout') }}
-													</a>
-				
-													<form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-														@csrf
-													</form>
-												</div>
-											</li>
-										@endguest
-									</ul>
-								</div>
-							</div>
-						</nav>
-				
+						
 				
 						<main class="py-4">
 							@yield('content')
@@ -444,5 +664,12 @@
 	============================================= -->
 	<script src="{{ asset("front/js/functions.js") }}"></script>
 
+
+
+    <script>
+		$("input[data-bootstrap-switch]").each(function(){
+		  $(this).bootstrapSwitch('state', $(this).prop('checked'));
+		});
+	</script>
 </body>
 </html>
