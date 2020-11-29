@@ -26,22 +26,21 @@
                             <table id="example3" class="table table-bordered table-hover">
                                 <thead>
                                   <tr>
-                                    <th>Title</th>
-                                    <th>Text</th>
-                                    <th>Image</th>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Avatar</th>
                                     <th>Action</th>
                                   </tr>
                                 </thead>
                                 <tbody>
-                                  @foreach ($sliders as $slider)
+                                  @foreach ($admins as $admin)
                                    <tr>
-                                    <td>{{ $slider->title }}</td>
-                                    <td>{{ $slider->text }}</td>
-                                    <td><img src="{{ asset($slider->image) }}" alt="" width="250px" height="200px"></td>
+                                    <td>{{ $admin->id }}</td>
+                                    <td>{{ $admin->name }}</td>
+                                    <td><img src="{{ asset($admin->avatar) }}" alt="" width="250px" height="200px"></td>
                                     <td>
-                                        <button class="button-blue" > <a href="{{ route('admin.slider.edit', $slider->id) }}"> Edit</a></button>
                                     
-                                        <form action="{{ route('admin.slider.delete', $slider->id) }}" method="POST">
+                                        <form action="{{ route('admin.delete', $admin->id) }}" method="POST">
                                             @csrf
                                             <button type="submit">Delete</button>
                                         </form>
@@ -68,17 +67,20 @@
         </div>
         <!-- /.tab-pane -->
         <div class="tab-pane" id="tab_2">
-            <form action="{{ route('admin.slider.submit') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('admin.create') }}" method="POST" enctype="multipart/form-data">
                 @csrf
             
-                <label for="title">Title</label>
-                <input type="text" name="title">
+                <label for="name">Name</label>
+                <input type="text" name="name">
             
-                <label for="text">Text</label>
-                <input type="text" name="text">
+                <label for="email">Email</label>
+                <input type="email" name="email">
+
+                <label for="password">Password</label>
+                <input type="password" name="password">
             
-                <label for="image">image</label>
-                <input type="file" name="image">
+                <label for="avatar">Avatar</label>
+                <input type="file" name="avatar">
             
                 <button type="submit">Submit</button>
             </form>

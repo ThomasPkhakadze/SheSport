@@ -88,7 +88,7 @@
             </li>
 
             <li class="nav-item">
-              <a href="{{ route('admin') }}" class="nav-link">
+              <a href="{{ route('admin.view') }}" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Create/View admins</p>
               </a>

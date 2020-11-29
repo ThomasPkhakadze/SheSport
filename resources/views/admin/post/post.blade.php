@@ -109,7 +109,7 @@
                                     <td>{{ $post->title }}</td>
                                     <td>{{ $post->desc }}</td>
                                     <td>{{ $post->body }}</td>
-                                    <td>{{ $post->admin->name }}</td>
+                                    <td>{{ $post->author->name }}</td>
                                     <td>
                                         <button class="button-blue" > <a href="{{ route('admin.post.edit', $post->id) }}"> Edit</a></button>
                                     
@@ -141,7 +141,7 @@
         </div>
         <!-- /.tab-pane -->
         <div class="tab-pane" id="tab_2">
-            <form action="{{ route('admin.post.submit') }}" method="POST">
+            <form action="{{ route('admin.post.submit') }}" method="POST" enctype="multipart/form-data">
                 @csrf
             
                 <label for="title">Title</label>
@@ -152,6 +152,9 @@
             
                 <label for="body">Body</label>
                 <input type="text" name="body">
+
+                <label for="image">Image</label>
+                <input type="file" name="image">
             
                 <button type="submit">Submit</button>
                 <input type="hidden" name="admin_id" value="{{ Auth::user()->id }}">

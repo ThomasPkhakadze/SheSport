@@ -56,23 +56,23 @@ class DashboardController extends Controller
         $post->title = $request->title;
         $post->desc = $request->desc;
         $post->body = $request->body;
-        // $post->sportsType = $request->sportsType;      
-        // $post->category = $request->category;
-        // $post->tag = $request->tag;
+        $post->sportsType = $request->sportsType;      
+        $post->category = $request->category;
+        $post->tag = $request->tag;
         
 
-        // $newfilename = time() . rand() . '.' . $request->file('image')->extension();
-        //     $path = $request->file('image')->move(public_path("images/"), $newfilename);
-        //     $lastPath = "images/" . $newfilename;
-        //     $request['image'] = $lastPath;
-        //     $post->image = $lastPath; 
+        $newfilename = time() . rand() . '.' . $request->file('image')->extension();
+            $path = $request->file('image')->move(public_path("images/"), $newfilename);
+            $lastPath = "images/" . $newfilename;
+            $request['image'] = $lastPath;
+            $post->image = $lastPath; 
         
 
-        //  $newfilename = time() . rand() . '.' . $request->file('video')->extension();
-        //     $path = $request->file('video')->move(public_path("videos/"), $newfilename);
-        //     $lastPath = "videos/" . $newfilename;
-        //     $request['video'] = $lastPath;
-        //     $post->video = $lastPath; 
+         $newfilename = time() . rand() . '.' . $request->file('video')->extension();
+            $path = $request->file('video')->move(public_path("videos/"), $newfilename);
+            $lastPath = "videos/" . $newfilename;
+            $request['video'] = $lastPath;
+            $post->video = $lastPath; 
         
        
         $post->is_published = false;

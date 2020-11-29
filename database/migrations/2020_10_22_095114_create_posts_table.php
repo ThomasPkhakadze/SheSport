@@ -18,7 +18,7 @@ class CreatePostsTable extends Migration
             $table->string('title');
             $table->string('desc')->nullable();
             $table->text('body');
-            $table->string('img')->nullable();
+            $table->string('image')->nullable();
             $table->string('video')->nullable();
             $table->string('sport_type')->nullable();
             $table->string('category')->nullable();

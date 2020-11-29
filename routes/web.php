@@ -34,13 +34,10 @@ Route::prefix('author')->group(function(){
     // Dashboard
     Route::get('/', 'Author\DashboardController@getAuthorDashboard')->name('author.dashboard');
 
-    Route::get('/profile', 'Author\DashboardController@getAuthorDashboard')->name('author.profile');
-    Route::post('/profile', 'Author\DashboardController@getAuthorDashboard')->name('author.profile.update');
-
-
     // Request Post
     Route::get('/post','Author\DashboardController@seeAllPosts')->name('author.post');
     Route::post('/post','Author\DashboardController@requestPostApproval')->name('author.post.submit');
+    Route::post('/post-delete, Author\DashboardController@deleteRequestedPost')->name('author.post.delete');
 
     // Login
     Route::get('/login', 'SpecialUserLoginController@showAuthorLoginForm')->name('author.login');
@@ -75,8 +72,8 @@ Route::prefix('admin')->group(function(){
 
 
      // Admin View, Create and delete 
-    Route::get('/create-admin', 'Admin\SpecialUserRegistrationController@showAdminRegisterForm')->name('admin');
-    Route::post('/create-admin', 'Admin\SpecialUserRegistrationController@createNewAdmin')->name('create.admin');
+    Route::get('/create-admin', 'Admin\SpecialUserRegistrationController@showAdminRegisterForm')->name('admin.view');
+    Route::post('/create-admin', 'Admin\SpecialUserRegistrationController@createNewAdmin')->name('admin.create');
     Route::post('/admin-delete/{id}', 'Admin\SpecialUserRegistrationController@deleteAdmin')->name('admin.delete');
 
 

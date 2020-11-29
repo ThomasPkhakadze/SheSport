@@ -41,7 +41,7 @@ class DashboardController extends Controller
             'title' => 'required',
             'desc' => 'nullable',
             'body' => 'required',
-            'img' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'video' => 'nullable|mimes:mp4,mov,ogg | max:20000',
             'tag' => 'nullable',
             'sport_type' => 'nullable',
@@ -62,6 +62,12 @@ class DashboardController extends Controller
         $post->author_id = $request->admin_id;
         $post->published_by_admin = true;
         $post->is_published = true;
+
+        $newfilename = time() . rand() . '.' . $request->file('image')->extension();
+            $path = $request->file('image')->move(public_path("images/"), $newfilename);
+            $lastPath = "images/" . $newfilename;
+            $request['image'] = $lastPath;
+            $post->image = $lastPath; 
 
         $post->save();
 
@@ -105,6 +111,14 @@ class DashboardController extends Controller
         $post->author_id = $request->admin_id;
         $post->published_by_admin = true;
         $post->is_published = true;
+
+        if(!empty($request->image)){
+            $newfilename = time() . rand() . '.' . $request->file('image')->extension();
+            $path = $request->file('image')->move(public_path("images/"), $newfilename);
+            $lastPath = "images/" . $newfilename;
+            $request['image'] = $lastPath;
+            $post->image = $lastPath;
+        } 
 
         $post->save();
 

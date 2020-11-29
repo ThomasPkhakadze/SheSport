@@ -52,7 +52,7 @@ class SliderController extends Controller
     {
         $slider = Slider::find($id);
 
-        return view('admin.slider.sliderEdit', ['slider' => $slider]);
+        return view('admin.slider.editSlider', ['slider' => $slider]);
     }
 
     public function update(Request $request, $id)

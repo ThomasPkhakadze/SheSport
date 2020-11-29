@@ -67,12 +67,21 @@ class SpecialUserRegistrationController extends Controller
 
         $password = Hash::make($request->password);
 
-        $admin = new Author;
+        $admin = new admin;
         $admin->name = $request->name;
         $admin->email = $request->email;
         $admin->password = $password;
         $admin->save();
 
-        return redirect()->route('admin');
+        return redirect()->route('admin.view');
+    }
+
+    public function deleteAdmin($id)
+    {
+        $admin = Admin::find($id);
+
+        $admin->delete();
+
+        return redirect()->route('admin.view');
     }
 }
