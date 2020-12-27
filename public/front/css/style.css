@@ -16394,3 +16394,37 @@ body:not(.no-transition) #wrapper,
     -webkit-text-stroke: 0px !important;
     text-shadow: none !important;
 }
+
+#sport-type-container {
+    /* padding: 10px;
+    margin-bottom: 20px;
+
+    background-color: #271f04;
+    overflow: hidden;
+    border-radius: 30px; */
+    background-color: #f1f1f1;
+    padding: 30px;
+    text-align: center;
+}
+#sport-type-container ul {
+    margin: 0px;
+    padding: 0px;
+}
+
+.sport-types {
+    list-style: none;
+}
+
+.sport-types li {
+    display: inline-block;
+    width: 22%;
+    text-align: center;
+    border-color: #1693a5;
+    margin: 0px;
+    padding: 4px;
+}
+.sticky {
+    position: fixed;
+    width: 100%;
+    top: 38px;
+}
