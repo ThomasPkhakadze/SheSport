@@ -843,9 +843,11 @@ span.middot {
 .col_two_third {
     width: 65.33%;
 }
-.col_one_fourth,
-.sidebar {
+.col_one_fourth {
     width: 22%;
+}
+.sidebar {
+    width: 100%;
 }
 .col_three_fourth,
 .postcontent {
@@ -4281,7 +4283,6 @@ body:not(.device-touch) .grid-container {
     margin: 0 0 40px 0;
     list-style: none;
     border: 1px solid rgba(0, 0, 0, 0.07);
-    float: left;
     border-radius: 4px;
 }
 
@@ -16396,12 +16397,10 @@ body:not(.no-transition) #wrapper,
 }
 
 #sport-type-container {
-    /* padding: 10px;
+    padding: 10px;
     margin-bottom: 20px;
-
-    background-color: #271f04;
     overflow: hidden;
-    border-radius: 30px; */
+    border-radius: 30px;
     background-color: #f1f1f1;
     padding: 30px;
     text-align: center;
@@ -16424,7 +16423,9 @@ body:not(.no-transition) #wrapper,
     padding: 4px;
 }
 .sticky {
+    background-color: rgb(204, 201, 28);
     position: fixed;
-    width: 100%;
+    float: right;
+    width: 66.66666666666667%;
     top: 38px;
 }

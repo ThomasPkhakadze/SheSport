@@ -21,52 +21,42 @@
 						<div class="col-xl-7">
 
 							<div style="position: relative; margin-bottom: 60px;" class="ohidden" data-height-xl="426" data-height-lg="567" data-height-md="470" data-height-md="287" data-height-xs="183">
-								<img src="{{ asset('images/test.jpg') }}" style="position: absolute; top: 0; left: 0; width: 100vh; height: 90vh;" data-animate="fadeInUp" data-delay="400" alt="iPad">
+								<img src="{{ asset('images/test.jpg') }}" style="position: absolute; top: 0; left: 0; " data-animate="fadeInUp" data-delay="400" alt="iPad">
 							</div>
 
 						</div>
 																						
 					</div>
-					<div class="row clearfix">
-						<div class="col-8">
-							<div  id="sport-type-container">
-							
-								<div class="sport-types">
-									<ul>
-										<li><a href="#">Football</a></li>
-										<li><a href="#">Basketball</a></li>
-										<li><a href="#">Volleyball</a></li>
-										<li><a href="#">Tennis</a></li>
-									</ul>
-								</div>
-									
-							</div>
+					<div class="row ">
+						<div class="col-sm-12">
+
+							<!-- SportType Filter
+							============================================= -->
 							<div id="portfolio-ajax-wrap">
 								<div id="portfolio-ajax-container"></div>
 							</div>
 		
 							<div id="portfolio-ajax-loader"><img src="images/preloader-dark.gif" alt="Preloader"></div>
-		
-							<!-- Portfolio Filter
-							============================================= -->
-							<ul id="portfolio-filter" class="portfolio-filter clearfix" data-container="#portfolio">
-		
-								<li class="activeFilter"><a href="#" data-filter="*">Show All</a></li>
-								<li><a href="#" data-filter=".pf-icons">Icons</a></li>
-								<li><a href="#" data-filter=".pf-illustrations">Illustrations</a></li>
-								<li><a href="#" data-filter=".pf-uielements">UI Elements</a></li>
-								<li><a href="#" data-filter=".pf-media">Media</a></li>
-								<li><a href="#" data-filter=".pf-graphics">Graphics</a></li>
-		
-							</ul>
-							<!-- #portfolio-filter end -->
-		
-							<div id="portfolio-shuffle" class="portfolio-shuffle" data-container="#portfolio">
-								<i class="icon-random"></i>
-							</div>
-		
-							<div class="clear"></div>
-		
+							<div  id="sport-type-container">
+							
+								<div class="sport-types" >
+									<ul id="portfolio-filter" class="portfolio-filter " data-container="#portfolio">
+										<li><a href="#" data-filter=".pf-icons">Football</a></li>
+										<li><a href="#" data-filter=".pf-illustrations">Basketball</a></li>
+										<li><a href="#" data-filter=".pf-uielements">Volleyball</a></li>
+										<li><a href="#" data-filter=".pf-graphics">Tennis</a></li>
+									</ul>
+								</div>
+								<div id="portfolio-shuffle" class="portfolio-shuffle" data-container="#portfolio">
+									<i class="icon-random"></i>
+								</div>
+			
+								<div class="clear"></div>
+							</div>		
+						</div>
+						<!-- #portfolio end -->
+
+						<div class="col-sm-8">
 							<!-- Portfolio Items
 							============================================= -->
 							<div id="portfolio" class="portfolio grid-container portfolio-nomargin portfolio-ajax clearfix">
@@ -274,13 +264,14 @@
 									</div>
 								</article>
 		
+							</div>
 						</div>
-						<!-- #portfolio end -->
-						<!-- Sidebar
-						============================================= -->
-						<div class="sidebar nobottommargin clearfix">
+						<div class="col-sm-4">
+							<!-- Sidebar
+							============================================= -->
+							<div class="sidebar nobottommargin ">
 								<div class="sidebar-widgets-wrap">
-									<div class="widget clearfix">
+									<div class="widget ">
 
 										<h4>Tag Cloud</h4>
 										<div class="tagcloud">
@@ -303,8 +294,9 @@
 
 								</div>
 
+							</div>
+							<!-- .sidebar end -->
 						</div>
-						<!-- .sidebar end -->
 					</div>
 				</div>
 
